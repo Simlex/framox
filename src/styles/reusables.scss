@@ -1,0 +1,38 @@
+@use  './variables.scss' as var;
+
+@mixin container {
+    background-color: var.$bgGrey;
+    width: 70%;
+    height: 420px;
+    // position: fixed;
+    padding: 48px;
+    border-radius: 0px;
+    margin: 0 auto;
+    margin-top: 48px;
+}
+
+@mixin button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: fit-content;
+    font-size: 16px;
+    font-weight: 300;
+    background-color: var.$black;
+    color: var.$white;
+    border-radius: 0px;
+    padding: 12px 24px;
+    cursor: pointer;
+}
+
+@mixin iconBox {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    &:hover {
+        background-color: var.$bgGrey;
+    }
+}
