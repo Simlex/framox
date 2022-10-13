@@ -1,11 +1,11 @@
 import React, { ReactElement, useRef, useState } from 'react';
-import { Route, Routes, Link, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './components/Home';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Product from './components/Product';
 import Container from './components/Container';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import Loader from './components/Loader';
 
 function App(): ReactElement {

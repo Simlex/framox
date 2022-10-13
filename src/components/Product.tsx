@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from '../styles/product.module.scss';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import sneakers1 from '../sneakers/sneakers_1.png';
 import sneakers2 from '../sneakers/sneakers_2.png';
@@ -137,7 +136,7 @@ const Product = (props: Props) => {
         return;
     }
 
-    const shoeSelectRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+    // const shoeSelectRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
     // useEffect(() => {
     // // console.log(shoeSelectRef.current);
     // if(shoeSelectRef.current.id == sneakersData[shoeSelectRef.current.id].visibility) {
@@ -173,8 +172,8 @@ const Product = (props: Props) => {
                         {
                             sneakersData.map((eachItem, key) => {
                                 return (
-                                    <div className={style.images__img} id={`${key}`} onClick={(e) => changeImg(e)} ref={shoeSelectRef}>
-                                        <img src={eachItem.sneakers} alt='Sneakers image' />
+                                    <div className={style.images__img} id={`${key}`} onClick={(e) => changeImg(e)}>
+                                        <img src={eachItem.sneakers} alt='Sneakers' />
                                     </div>
                                 )
                             })
@@ -199,7 +198,7 @@ const Product = (props: Props) => {
                                                         initial={{ y: -10 * key, opacity: 0 }}
                                                         animate={{ y: 0, opacity: 1 }}
                                                         whileHover={{ y: -4 }}>
-                                                        <img src={eachItem.sneakers} alt='Sneakers image' />
+                                                        <img src={eachItem.sneakers} alt='Sneakers' />
                                                     </motion.div>
                                                 )
                                             })
@@ -243,7 +242,7 @@ const Product = (props: Props) => {
                                 shoeSizes.map((eachSize, key) => {
                                     return (
                                         <>
-                                            {shoesize == `${eachSize}` ?
+                                            {shoesize === `${eachSize}` ?
                                                 <div className={`${style.sizeNum} ${style.selected}`} onClick={(e) => setShoesize(e.currentTarget.innerHTML)}>
                                                     {eachSize}
                                                 </div>
