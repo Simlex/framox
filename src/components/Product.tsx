@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from '../styles/product.module.scss';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
@@ -242,7 +242,7 @@ const Product = (props: Props) => {
                                 shoeSizes.map((eachSize, key) => {
                                     return (
                                         <>
-                                            {shoesize == `${eachSize}` ?
+                                            {shoesize === `${eachSize}` ?
                                                 <div className={`${style.sizeNum} ${style.selected}`} onClick={(e) => setShoesize(e.currentTarget.innerHTML)}>
                                                     {eachSize}
                                                 </div>
