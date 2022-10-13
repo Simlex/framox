@@ -31,9 +31,21 @@ const paragraphVariants = {
     }
 }
 
+const homeContainer = {
+    exit: {
+        x: '-100%',
+        opacity: 0,
+        transition: { 
+            type: 'tween',
+         }
+    }
+}
+
 const Home = () => {
     return (
-        <div className={style.homeContainer}>
+        <motion.div className={style.homeContainer}
+        variants={homeContainer}
+        exit='exit'>
             <motion.p
                 variants={headerVariants}
                 initial="first"
@@ -57,7 +69,7 @@ const Home = () => {
                     Shop Now
                 </motion.div>
             </Link>
-        </div>
+        </motion.div>
     )
 }
 

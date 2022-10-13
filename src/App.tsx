@@ -1,22 +1,54 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useRef, useState } from 'react';
 import { Route, Routes, Link, useLocation } from 'react-router-dom';
 import Home from './components/Home';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Product from './components/Product';
 import Container from './components/Container';
+import { motion, AnimatePresence } from 'framer-motion';
+import Loader from './components/Loader';
 
 function App(): ReactElement {
-  const locaton = useLocation();
+  const location = useLocation();
+
+  const [loaderVisible, setLoaderVisible] = useState(true);
+  setTimeout(() => {
+    setLoaderVisible(false);
+  }, 4000);
+
+  const cursorRef = useRef<HTMLDivElement>();
+  document.addEventListener("mousemove", moveCursor);
+  function moveCursor(e: any) {
+    let x = e.clientX - 13;
+    let y = e.clientY - 12;
+
+    if(cursorRef.current !== undefined) {
+    cursorRef.current.style.left = `${x}px`;
+    cursorRef.current.style.top = `${y}px`;
+    }
+
+  }
+
   return (
     <>
-      <Container>
-        <Routes>
-          <Route path='/Checkout' element={<Checkout />} />
-          <Route path='/Cart' element={<Cart />} />
-          <Route path='/' element={<Home />} />
-          <Route path='/Product' element={<Product />} />
-        </Routes>
+      <Container cursorRef={cursorRef}>
+        <>
+          {loaderVisible && (<Loader />)}
+          {/* <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 4 }}> */}
+          {
+            !loaderVisible && (
+              <AnimatePresence exitBeforeEnter>
+                <Routes key={location.pathname} location={location}>
+                  <Route path='/Checkout' element={<Checkout />} />
+                  <Route path='/Cart' element={<Cart />} />
+                  <Route path='/' element={<Home />} />
+                  <Route path='/Product' element={<Product />} />
+                </Routes>
+              </AnimatePresence>
+            )
+          }
+          {/* </motion.div> */}
+        </>
       </Container>
     </>
   );

@@ -81,9 +81,6 @@
                     height: 36px;
                     display: flex;
                     cursor: pointer;
-                    &:first-child {
-                        background-color: darken($color: var.$bgGrey, $amount: 10%);
-                    }
                     &:hover {
                         background-color: darken($color: var.$bgGrey, $amount: 5%);
                     }
@@ -92,6 +89,9 @@
                         // height: 48px;
                         margin: auto;
                     }
+                }
+                .selected {
+                    background-color: darken($color: var.$bgGrey, $amount: 10%);
                 }
                 &__more {
                     width: 36px;
@@ -150,11 +150,20 @@
                         width: 32px;
                         height: 32px;
                         border-radius: 100%;
-                        border: 1px solid;
+                        border: 1px solid var.$black;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         font-size: 12px;
+                        position: relative;
+                        span {
+                            width: 100%;
+                            height: 100%;
+                            background-color: var.$grey;
+                            position: absolute;
+                            border-radius: 100%;
+                            z-index: 1;
+                        }
                     }
                     .selected {
                         background-color: var.$black;
@@ -190,7 +199,7 @@
                         }
                     }
                     span {
-                    font-size: 12px;
+                        font-size: 12px;
                     }
                 }
             }
@@ -216,11 +225,25 @@
                     .colorGrey {
                         background-color: var.$grey;
                     }
+                    .cSelected {
+                        @extend .colorBlack;
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        span {
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 100%;
+                            content: "";
+                            border: 2px solid var.$black;
+                            position: absolute;
+                        }
+                    }
                 }
             }
         }
     }
-    
 
     .bottom {
         background-color: var.$white;
@@ -240,7 +263,8 @@
         &__navigate {
             display: flex;
             gap: 12px;
-            .rightNavigate, .leftNavigate {
+            .rightNavigate,
+            .leftNavigate {
                 @include iconBox();
             }
         }
@@ -248,6 +272,13 @@
             display: flex;
             align-items: center;
             gap: 24px;
+            position: relative;
+            .added {
+                position: absolute;
+                left: -100px;
+                font-size: 12px;
+                margin-right: -10px;
+            }
             .addItemBtn {
                 font-size: 14px;
                 height: 30px;
