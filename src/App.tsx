@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useRef, useState } from 'react';
 import { Route, Routes, Link, useLocation } from 'react-router-dom';
 import Home from './components/Home';
 import Cart from './components/Cart';
@@ -16,9 +16,22 @@ function App(): ReactElement {
     setLoaderVisible(false);
   }, 4000);
 
+  const cursorRef = useRef<HTMLDivElement>();
+  document.addEventListener("mousemove", moveCursor);
+  function moveCursor(e: any) {
+    let x = e.clientX - 13;
+    let y = e.clientY - 12;
+
+    if(cursorRef.current !== undefined) {
+    cursorRef.current.style.left = `${x}px`;
+    cursorRef.current.style.top = `${y}px`;
+    }
+
+  }
+
   return (
     <>
-      <Container>
+      <Container cursorRef={cursorRef}>
         <>
           {loaderVisible && (<Loader />)}
           {/* <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 4 }}> */}
