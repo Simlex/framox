@@ -8,12 +8,74 @@ import sneakers2 from '../sneakers/sneakers_2.png';
 import sneakers3 from '../sneakers/sneakers_3.png';
 import sneakers4 from '../sneakers/sneakers_4.png';
 import { Rate } from 'antd';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 
 type Props = {
 
+}
+
+
+const productContainer = {
+    exit: {
+        scale: 2,
+        opacity: 0,
+        transition: {
+            type: 'spring'
+        }
+    }
+}
+const productImgVariant = {
+    first: {
+        x: -500,
+        y: -100,
+        scale: 0.4,
+        opacity: 0
+    },
+    second: {
+        x: 0,
+        y: 0,
+        scale: 1,
+        opacity: 1,
+        transition: {
+            delay: 0.2,
+            type: 'spring',
+            // Lower stifness, dull transition
+            stiffness: 120,
+            when: 'beforeChildren',
+            staggerChildren: 2.5
+        }
+    }
+}
+const childImgVariant = {
+    hover: {
+        rotate: -20,
+        x: -50,
+        y: -16,
+        transition: {
+            duration: 0.3,
+            yoyo: 4
+        }
+    }
+}
+const colorSelection = {
+    second: {
+        scale: [1.2, 1],
+        transition: {
+            type: 'tween',
+            duration: 0.2,
+            yoyo: 10,
+        },
+    },
+    hover: {
+        scale: 1.2,
+        transition: {
+            type: 'spring',
+            duration: 0.2,
+            // yoyo: 2,
+        },
+    }
 }
 
 const Product = (props: Props) => {
@@ -22,12 +84,11 @@ const Product = (props: Props) => {
     const desc = ['terrible', 'bad', 'fair', 'good', 'wonderful'];
 
     const [moreVisibility, setMoreVisibility] = useState(false);
-    // function toggleMoreOptions() {
-
-    // }
 
     return (
-        <div className={style.productContainer}>
+        <motion.div className={style.productContainer}
+            variants={productContainer}
+            exit='exit'>
             <div className={style.productContainer__top}>
                 FRAMOX
                 <Link to='/'>
@@ -57,37 +118,44 @@ const Product = (props: Props) => {
                                 )
                             })
                         }
-                        <div className={style.images__more} onClick={() => setMoreVisibility(!moreVisibility)}>
+                        <motion.div
+                            className={style.images__more}
+                            onClick={() => setMoreVisibility(!moreVisibility)}
+                            whileHover={{ rotate: 10 }}>
                             +4
-                        </div>
-                        {
-                            moreVisibility && (
-                                <div className={style.imagesAbs}>
-                                    {
-                                        sneakers.map((eachItem, key) => {
-                                            return (
-                                                <motion.div className={style.imagesAbs__img}
-                                                    onClick={() => setMoreVisibility(!moreVisibility)}
-                                                    initial={{ y: -10 * key, opacity: 0 }}
-                                                    animate={{ y: 0, opacity: 1 }}
-                                                    whileHover={{ y: -4 }}>
-                                                    <img src={eachItem} alt='Sneakers image' />
-                                                </motion.div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            )
-                        }
+                        </motion.div>
+                        <AnimatePresence>
+                            {
+                                moreVisibility && (
+                                    <motion.div className={style.imagesAbs}
+                                        exit={{ x: 2, opacity: 0 }}
+                                        transition={{ type: 'spring' }}>
+                                        {
+                                            sneakers.map((eachItem, key) => {
+                                                return (
+                                                    <motion.div className={style.imagesAbs__img}
+                                                        onClick={() => setMoreVisibility(!moreVisibility)}
+                                                        initial={{ y: -10 * key, opacity: 0 }}
+                                                        animate={{ y: 0, opacity: 1 }}
+                                                        whileHover={{ y: -4 }}>
+                                                        <img src={eachItem} alt='Sneakers image' />
+                                                    </motion.div>
+                                                )
+                                            })
+                                        }
+                                    </motion.div>
+                                )
+                            }
+                        </AnimatePresence>
                     </div>
                 </div>
                 <motion.div className={style.productImg}
-                    initial={{ x: -500, y: -100, scale: 0.4, opacity: 0 }}
-                    animate={{ x: 0, y: 0, scale: 1, opacity: 1 }}
-                    // Lower stifness, dull transition
-                    transition={{ delay: 0.2, type: 'spring', stiffness: 120}}
-                    whileHover={{ rotate: -20, x: -50, y:-16 }}>
-                    <img src={sneakers1} alt='Sneakers image' loading='lazy' />
+                    variants={productImgVariant}
+                    initial='first'
+                    animate='second'>
+                    <motion.img src={sneakers1} alt='Sneakers image' loading='lazy'
+                        variants={childImgVariant}
+                        whileHover="hover" />
                 </motion.div>
                 <div className={style.productDetails}>
                     <div className={style.productDetails__size}>
@@ -113,7 +181,12 @@ const Product = (props: Props) => {
                     <div className={style.productDetails__color}>
                         <span>Color</span>
                         <div className={style.color}>
-                            <div className={`${style.colorBlack} ${style.cSelected}`}></div>
+                            <div className={`${style.colorBlack} ${style.cSelected}`}>
+                                <motion.span
+                                    variants={colorSelection}
+                                    animate='second'
+                                    whileHover='hover'></motion.span>
+                            </div>
                             <div className={style.colorOrange}></div>
                             <div className={style.colorGrey}></div>
                         </div>
@@ -137,7 +210,7 @@ const Product = (props: Props) => {
                     </div>
                 </div>
             </motion.div>
-        </div>
+        </motion.div>
     )
 }
 
