@@ -7,6 +7,7 @@ import Product from './components/Product';
 import Container from './components/Container';
 import { AnimatePresence } from 'framer-motion';
 import Loader from './components/Loader';
+import style from './styles/app.module.scss';
 
 function App(): ReactElement {
   const location = useLocation();
@@ -14,7 +15,7 @@ function App(): ReactElement {
   const [loaderVisible, setLoaderVisible] = useState(true);
   setTimeout(() => {
     setLoaderVisible(false);
-  }, 4000);
+  }, 5000);
 
   const cursorRef = useRef<HTMLDivElement>();
   document.addEventListener("mousemove", moveCursor);
@@ -29,8 +30,15 @@ function App(): ReactElement {
 
   }
 
+  console.log('Location path: ', location.pathname);
+  
+
   return (
     <>
+    <p className={style.text}>
+      {location.pathname === '/' && 'Home'}
+      {location.pathname === '/Product' && 'Product'}
+    </p>
       <Container cursorRef={cursorRef}>
         <>
           {loaderVisible && (<Loader />)}

@@ -20,6 +20,7 @@ const productContainer = {
     exit: {
         scale: 2,
         opacity: 0,
+        rotate: 20,
         transition: {
             type: 'spring'
         }
@@ -98,8 +99,25 @@ const Product = (props: Props) => {
         {
             sneakers: sneakers4,
             visibility: false
+        },
+        {
+            sneakers: sneakers2,
+            visibility: false
+        },
+        {
+            sneakers: sneakers4,
+            visibility: false
+        },
+        {
+            sneakers: sneakers1,
+            visibility: false
         }
     ])
+    // Slice main data to only 4 items
+    const visibleSneakersData = sneakersData.slice(0, 4);
+    // Assign remaining data
+    const remainingSneakersData = sneakersData.slice(4, );
+
     const shoeSizes = [37, 39, 42, 45];
 
     const [value, setValue] = useState(3);
@@ -132,7 +150,7 @@ const Product = (props: Props) => {
         const newSneakersData = [...sneakersData];
         // set state 
         setSneakersData(newSneakersData);
-        
+
         return;
     }
 
@@ -170,9 +188,9 @@ const Product = (props: Props) => {
                     <p>Running sneakers with thin elastic laces.</p>
                     <div className={style.images}>
                         {
-                            sneakersData.map((eachItem, key) => {
+                            visibleSneakersData.map((eachItem, index) => {
                                 return (
-                                    <div className={style.images__img} id={`${key}`} onClick={(e) => changeImg(e)}>
+                                    <div className={style.images__img} id={`${index}`} onClick={(e) => changeImg(e)} key={index}>
                                         <img src={eachItem.sneakers} alt='Sneakers' />
                                     </div>
                                 )
@@ -182,7 +200,7 @@ const Product = (props: Props) => {
                             className={style.images__more}
                             onClick={() => setMoreVisibility(!moreVisibility)}
                             whileHover={{ rotate: 10 }}>
-                            +4
+                            +{remainingSneakersData.length}
                         </motion.div>
                         <AnimatePresence>
                             {
@@ -191,13 +209,18 @@ const Product = (props: Props) => {
                                         exit={{ x: 2, opacity: 0 }}
                                         transition={{ type: 'spring' }}>
                                         {
-                                            sneakersData.map((eachItem, key) => {
+                                            remainingSneakersData.map((eachItem, index) => {
                                                 return (
                                                     <motion.div className={style.imagesAbs__img}
-                                                        onClick={() => setMoreVisibility(!moreVisibility)}
-                                                        initial={{ y: -10 * key, opacity: 0 }}
+                                                        onClick={(e) => {
+                                                            setMoreVisibility(!moreVisibility)
+                                                            changeImg(e)
+                                                        }}
+                                                        id={`${index + visibleSneakersData.length}`}
+                                                        initial={{ y: -10 * index, opacity: 0 }}
                                                         animate={{ y: 0, opacity: 1 }}
-                                                        whileHover={{ y: -4 }}>
+                                                        whileHover={{ y: -4 }}
+                                                        key={index}>
                                                         <img src={eachItem.sneakers} alt='Sneakers' />
                                                     </motion.div>
                                                 )
