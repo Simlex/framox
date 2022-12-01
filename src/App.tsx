@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import React, { ReactElement, useRef, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './components/Home';
 import Cart from './components/Cart';
@@ -9,11 +9,10 @@ import { AnimatePresence } from 'framer-motion';
 import Loader from './components/Loader';
 import style from './styles/app.module.scss';
 // Images 
-import sneakers1 from '../src/sneakers/sneakers_1.png';
-import sneakers2 from '../src/sneakers/sneakers_2.png';
-import sneakers3 from '../src/sneakers/sneakers_3.png';
-import sneakers4 from '../src/sneakers/sneakers_4.png';
-import { cleanup } from '@testing-library/react';
+// import sneakers1 from '../src/sneakers/sneakers_1.png';
+// import sneakers2 from '../src/sneakers/sneakers_2.png';
+// import sneakers3 from '../src/sneakers/sneakers_3.png';
+// import sneakers4 from '../src/sneakers/sneakers_4.png';
 
 function App(): ReactElement {
   const location = useLocation();

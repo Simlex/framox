@@ -1,4 +1,4 @@
-import React, { LegacyRef, MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import style from '../styles/checkout.module.scss';
 import { IoIosCloseCircleOutline, IoMdAdd } from 'react-icons/io';
 import { IoChevronBack } from 'react-icons/io5';
@@ -18,8 +18,6 @@ const Checkout = () => {
 
   const [cardNumber, setCardNumber] = useState(1320);
 
-  const bankMethod = useRef<HTMLInputElement>();
-
   const cardCarousel = useRef<HTMLDivElement>();
 
   useEffect(() => {
@@ -30,9 +28,6 @@ const Checkout = () => {
   
 // Images 
 const sneakers1 = 'https://ik.imagekit.io/simlex/sneakers_1.png';
-const sneakers2 = 'https://ik.imagekit.io/simlex/sneakers_2.png';
-const sneakers3 = 'https://ik.imagekit.io/simlex/sneakers_3.png';
-const sneakers4 = 'https://ik.imagekit.io/simlex/sneakers_4.png';
 
   useEffect(() => {
 
@@ -49,7 +44,7 @@ const sneakers4 = 'https://ik.imagekit.io/simlex/sneakers_4.png';
     }
 
     cardCarousel.current?.addEventListener('scroll', scrollFunc);
-  }, [cardCarousel.current]);
+  }, [cardCarousel]);
 
   return (
     <div className={style.checkoutContainer}>
