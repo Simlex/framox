@@ -62,26 +62,27 @@ const childImgVariant = {
         scale: 1.5,
     }
 }
-const colorSelection = {
-    second: {
-        scale: [1.2, 1],
-        transition: {
-            type: 'tween',
-            duration: 0.2,
-            yoyo: 10,
-        },
-    },
-    hover: {
-        scale: 1.2,
-        transition: {
-            type: 'spring',
-            duration: 0.2,
-            // yoyo: 2,
-        },
-    }
-}
+// const colorSelection = {
+//     second: {
+//         scale: [1.2, 1],
+//         transition: {
+//             type: 'tween',
+//             duration: 0.2,
+//             yoyo: 10,
+//         },
+//     },
+//     hover: {
+//         scale: 1.2,
+//         transition: {
+//             type: 'spring',
+//             duration: 0.2,
+//             // yoyo: 2,
+//         },
+//     }
+// }
 
 // Images 
+
 const sneakers1 = 'https://ik.imagekit.io/simlex/sneakers_1.png';
 const sneakers2 = 'https://ik.imagekit.io/simlex/sneakers_2.png';
 const sneakers3 = 'https://ik.imagekit.io/simlex/sneakers_3.png';
@@ -254,7 +255,7 @@ const Product = (props: Props) => {
                                             {sneakersData[key].visibility && (
                                                 <motion.img
                                                     src={each.sneakers}
-                                                    alt='Sneakers image'
+                                                    alt='Sneakers'
                                                     loading='lazy'
                                                     variants={childImgVariant}
                                                     whileHover="hover"
@@ -302,18 +303,18 @@ const Product = (props: Props) => {
                             <p>{(450).toLocaleString('en-NG', { style: 'currency', currency: 'NGN', })}</p>
                         </div>
                         {/* <div className={style.productDetails__color}>
-                        <span>Color</span>
-                        <div className={style.color}>
-                            <div className={`${style.colorBlack} ${style.cSelected}`}>
-                                <motion.span
-                                    variants={colorSelection}
-                                    animate='second'
-                                    whileHover='hover'></motion.span>
+                            <span>Color</span>
+                            <div className={style.color}>
+                                <div className={`${style.colorBlack} ${style.cSelected}`}>
+                                    <motion.span
+                                        variants={colorSelection}
+                                        animate='second'
+                                        whileHover='hover'></motion.span>
+                                </div>
+                                <div className={style.colorOrange}></div>
+                                <div className={style.colorGrey}></div>
                             </div>
-                            <div className={style.colorOrange}></div>
-                            <div className={style.colorGrey}></div>
-                        </div>
-                    </div> */}
+                        </div> */}
                         {/* Make this a component */}
                         <div className={style.productDetails__cart}>
                             <div className={style.top}>
