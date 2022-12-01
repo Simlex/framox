@@ -327,7 +327,7 @@ const Product = (props: Props) => {
                             <div className={style.productGrp}>
                                 <div className={style.product}>
                                     <div className={style.product__img}>
-                                        <img src={sneakers1} alt='Sneakers image' />
+                                        <img src={sneakers1} alt='Sneakers' />
                                     </div>
                                     <div className={style.product__info}>
                                         <p>Nike Air max 360</p>
@@ -341,7 +341,7 @@ const Product = (props: Props) => {
                                 </div>
                                 <div className={style.product}>
                                     <div className={style.product__img}>
-                                        <img src={sneakers1} alt='Sneakers image' />
+                                        <img src={sneakers1} alt='Sneakers' />
                                     </div>
                                     <div className={style.product__info}>
                                         <p>Nike Air max 360</p>
@@ -355,7 +355,7 @@ const Product = (props: Props) => {
                                 </div>
                                 <div className={style.product}>
                                     <div className={style.product__img}>
-                                        <img src={sneakers1} alt='Sneakers image' />
+                                        <img src={sneakers1} alt='Sneakers' />
                                     </div>
                                     <div className={style.product__info}>
                                         <p>Nike Air max 360</p>
@@ -369,7 +369,7 @@ const Product = (props: Props) => {
                                 </div>
                                 <div className={style.product}>
                                     <div className={style.product__img}>
-                                        <img src={sneakers1} alt='Sneakers image' />
+                                        <img src={sneakers1} alt='Sneakers' />
                                     </div>
                                     <div className={style.product__info}>
                                         <p>Nike Air max 360</p>
