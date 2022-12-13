@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import style from '../../styles/similarProducts.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -12,9 +12,9 @@ type Props = {
     }[]
 }
 
-const sneakers2 = 'https://ik.imagekit.io/simlex/sneakers_2.png';
-const sneakers3 = 'https://ik.imagekit.io/simlex/sneakers_3.png';
-const sneakers4 = 'https://ik.imagekit.io/simlex/sneakers_4.png';
+// const sneakers2 = 'https://ik.imagekit.io/simlex/sneakers_2.png';
+// const sneakers3 = 'https://ik.imagekit.io/simlex/sneakers_3.png';
+// const sneakers4 = 'https://ik.imagekit.io/simlex/sneakers_4.png';
 
 const SimilarProducts = (props: Props) => {
 

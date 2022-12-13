@@ -234,7 +234,7 @@ const Product = (props: Props) => {
     ]
 
     // let containerRef = props.containerRef;
-    let productLength = productDummyData.length;
+    // let productLength = productDummyData.length;
 
     useEffect(() => {
         if (containerRef !== undefined && containerRef.current) {
@@ -248,10 +248,10 @@ const Product = (props: Props) => {
         }
     }, [containerRef]);
 
-    function scrollCarousel(productNumber: number) {
-        // @ts-ignore
-        containerRef.current.scrollLeftMax += productNumber;
-    }
+    // function scrollCarousel(productNumber: number) {
+    //     // @ts-ignore
+    //     containerRef.current.scrollLeftMax += productNumber;
+    // }
 
     //#endregion
 
