@@ -9,7 +9,6 @@ import { AnimatePresence } from 'framer-motion';
 import Loader from './components/Loader';
 import style from './styles/app.module.scss';
 import useResponsive from './components/custom-hooks/UseResponsive';
-import { IoMdConstruct } from 'react-icons/io';
 import { IoConstruct } from 'react-icons/io5';
 // Images 
 // import sneakers1 from '../src/sneakers/sneakers_1.png';
