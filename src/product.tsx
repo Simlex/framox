@@ -236,17 +236,17 @@ const Product = (props: Props) => {
     // let containerRef = props.containerRef;
     // let productLength = productDummyData.length;
 
-    useEffect(() => {
-        if (containerRef !== undefined && containerRef.current) {
-            // @ts-ignore
-            // let maxScroll = containerRef.current.scrollLeftMax;
-            // let eachMove = maxScroll / productLength;
-            console.log(containerRef.current);
-            console.log(containerRef.current.scrollLeft);
-            console.log(productDummyData.length);
-            // scrollCarousel(eachMove);
-        }
-    }, [containerRef]);
+    // useEffect(() => {
+    //     if (containerRef !== undefined && containerRef.current) {
+    //         // @ts-ignore
+    //         // let maxScroll = containerRef.current.scrollLeftMax;
+    //         // let eachMove = maxScroll / productLength;
+    //         console.log(containerRef.current);
+    //         console.log(containerRef.current.scrollLeft);
+    //         console.log(productDummyData.length);
+    //         // scrollCarousel(eachMove);
+    //     }
+    // }, [containerRef]);
 
     // function scrollCarousel(productNumber: number) {
     //     // @ts-ignore
