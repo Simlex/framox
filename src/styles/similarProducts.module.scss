@@ -1,0 +1,75 @@
+@use "./variables.scss" as var;
+@use "./reusables.scss" as *;
+
+.similarProducts {
+    position: absolute;
+    bottom: 0;
+    // bottom: -30%;
+    left: 0;
+    // border: 2px solid #000;
+    width: 100%;
+    .productsBox {
+        width: 90%;
+        // border: 1px solid #000;
+        margin: 0 auto;
+        background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.01));
+        backdrop-filter: blur(25px);
+        .container {
+            width: 100%;
+            background-color: #fff;
+            height: 64px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-radius: 16px 16px 0px 0px;
+        }
+        .productsCarouselContainer {
+            width: 100%;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            .productCarousel {
+                width: fit-content;
+                display: flex;
+                gap: 8px;
+                flex-wrap: nowrap;
+                .eachProduct {
+                    position: relative;
+                    cursor: pointer;
+                    width: 200px;
+                    height: auto;
+                    padding: 12px;
+                    border-radius: 12px;
+                    background-color: #fff;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 8px;
+                    &:hover {
+                        img {
+                            scale: 1;
+                            rotate: -10deg;
+                        }
+                        p {
+                            text-decoration: underline;
+                        }
+                    }
+                    img {
+                        // width: 100%;
+                        width: auto;
+                        height: 86px;
+                        margin: 0 auto;
+                        scale: 0.8;
+                        transition: all 300ms ease;
+                    }
+                    p {
+                        font-size: 14px;
+                        text-align: center;
+                        max-width: 160px;
+                        margin: 0px;
+                        transition: all 300ms ease;
+                    }
+                }
+            }
+        }
+    }
+}

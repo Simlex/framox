@@ -1,5 +1,5 @@
 import React from 'react';
-import style from '../styles/home.module.scss';
+import style from './styles/home.module.scss';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { BsCartCheck, BsCart } from 'react-icons/bs';
@@ -120,7 +120,7 @@ const Home = () => {
                     <p>Notification</p>
                 </motion.div>
 
-                <Link to='/Product'>
+                <Link to='/product'>
                     <motion.div className={style.bigLink}
                         variants={linkBtn}
                         initial='first'

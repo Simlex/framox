@@ -1,10 +1,10 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
-import style from '../styles/checkout.module.scss';
+import style from './styles/checkout.module.scss';
 import { IoIosCloseCircleOutline, IoMdAdd } from 'react-icons/io';
 import { IoChevronBack } from 'react-icons/io5';
 // import sneakers1 from '../sneakers/sneakers_1.png';
-import BlueBg from '../backgrounds/blue_abstract.jpg';
-import Whitey from '../backgrounds/white_abstract.jpg';
+import BlueBg from './backgrounds/blue_abstract.jpg';
+import Whitey from './backgrounds/white_abstract.jpg';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { BsCheck2Circle, BsCircle } from 'react-icons/bs';
@@ -80,7 +80,7 @@ const sneakers1 = 'https://ik.imagekit.io/simlex/sneakers_1.png';
           }
         </div>
         <div className={style.bottom}>
-          <Link to='/Product'>
+          <Link to='/product'>
             <motion.p className={style.backNav}
               whileHover={{ backgroundColor: '#000', color: '#fff' }}>
               <IoChevronBack /> View products

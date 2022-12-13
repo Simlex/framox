@@ -1,7 +1,8 @@
-import React, { useEffect, useState, Suspense } from 'react';
-import style from '../styles/product.module.scss';
+import React, { useEffect, useState, Suspense, useRef } from 'react';
+import style from './styles/product.module.scss';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import SellerImg from './user/profileImg.png';
 // import sneakers1 from '../sneakers/sneakers_1.png';
 // import sneakers2 from '../sneakers/sneakers_2.png';
 // import sneakers3 from '../sneakers/sneakers_3.png';
@@ -9,6 +10,8 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { Rate } from 'antd';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import SimilarProducts from './components/Product/SimilarProducts';
+import { IoMdCart } from 'react-icons/io';
 
 
 type Props = {
@@ -89,6 +92,9 @@ const sneakers3 = 'https://ik.imagekit.io/simlex/sneakers_3.png';
 const sneakers4 = 'https://ik.imagekit.io/simlex/sneakers_4.png';
 
 const Product = (props: Props) => {
+
+    //#region states 
+
     // const sneakers = [sneakers4, sneakers2, sneakers3, sneakers4];
     const [sneakersData, setSneakersData] = useState([
         {
@@ -134,15 +140,17 @@ const Product = (props: Props) => {
     const [shoesize, setShoesize] = useState<string | number>(45);
     const [like, setLike] = useState(false);
 
+    // State for Add to cart animation 
     const [cart, setCart] = useState(false);
-    useEffect(() => {
-        if (cart) {
-            setTimeout(() => {
-                setCart(false)
-            }, 2500);
-        }
-    }, [cart]);
 
+    // State for Similar products visibility status 
+    const [similarProductsVisibility, setSimilarProductsVisibility] = useState(false);
+
+    //#endregion 
+
+    //#region functions 
+
+    // Function to change product to selected product 
     const changeImg = (e: any) => {
         // Iterate over sneaker data array
         for (let i = 0; i < sneakersData.length; i++) {
@@ -160,6 +168,92 @@ const Product = (props: Props) => {
 
         return;
     }
+
+    const toggleSimilarProducts = () => {
+        setSimilarProductsVisibility(!similarProductsVisibility);
+    }
+
+    //#endregion 
+
+    //#region hooks
+
+    // Use effect to handl Add to cart animation 
+    useEffect(() => {
+        if (cart) {
+            setTimeout(() => {
+                setCart(false)
+            }, 2500);
+        }
+    }, [cart]);
+
+    // Ref hook for similar products component 
+    const containerRef = useRef<HTMLDivElement>();
+
+
+    const productDummyData = [
+        {
+            img: sneakers2,
+            name: 'High Swimmer Nike Sneakers',
+        },
+        {
+            img: sneakers2,
+            name: 'High Swimmer Nike Sneakers',
+        },
+        {
+            img: sneakers3,
+            name: 'High Swimmer Nike Sneakers',
+        },
+        {
+            img: sneakers4,
+            name: 'High Swimmer Nike Sneakers',
+        },
+        {
+            img: sneakers2,
+            name: 'High Swimmer Nike Sneakers',
+        },
+        {
+            img: sneakers4,
+            name: 'High Swimmer Nike Sneakers',
+        },
+        {
+            img: sneakers2,
+            name: 'High Swimmer Nike Sneakers',
+        },
+        {
+            img: sneakers4,
+            name: 'High Swimmer Nike Sneakers',
+        },
+        {
+            img: sneakers2,
+            name: 'High Swimmer Nike Sneakers',
+        },
+        {
+            img: sneakers3,
+            name: 'High Swimmer Nike Sneakers',
+        },
+    ]
+
+    // let containerRef = props.containerRef;
+    // let productLength = productDummyData.length;
+
+    // useEffect(() => {
+    //     if (containerRef !== undefined && containerRef.current) {
+    //         // @ts-ignore
+    //         // let maxScroll = containerRef.current.scrollLeftMax;
+    //         // let eachMove = maxScroll / productLength;
+    //         console.log(containerRef.current);
+    //         console.log(containerRef.current.scrollLeft);
+    //         console.log(productDummyData.length);
+    //         // scrollCarousel(eachMove);
+    //     }
+    // }, [containerRef]);
+
+    // function scrollCarousel(productNumber: number) {
+    //     // @ts-ignore
+    //     containerRef.current.scrollLeftMax += productNumber;
+    // }
+
+    //#endregion
 
     // const shoeSelectRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
     // useEffect(() => {
@@ -180,7 +274,7 @@ const Product = (props: Props) => {
                     <Link to='/'>
                         <p>Back to Home</p>
                     </Link>
-                    <Link to='/Checkout'>
+                    <Link to='/checkout'>
                         <div className={style.checkout}>
                             <HiOutlineShoppingBag />
                         </div>
@@ -190,56 +284,21 @@ const Product = (props: Props) => {
                     <div className={style.productDesc}>
                         <div className={style.productDesc__name}>
                             <div className={style.top}>
+                                {/* Brand */}
                                 <span>FENDI</span>
                                 <span className={style.dash}></span>
                             </div>
-                            <h3>Black technical knit fabric high-tops</h3>
+                            {/* Product name */}
+                            <h3>Runner winter technical sneakers</h3>
                         </div>
-                        <p>Running sneakers with thin elastic laces.</p>
-                        <div className={style.images}>
-                            {
-                                visibleSneakersData.map((eachItem, index) => {
-                                    return (
-                                        <div className={style.images__img} id={`${index}`} onClick={(e) => changeImg(e)} key={index}>
-                                            <img src={eachItem.sneakers} alt='Sneakers' />
-                                        </div>
-                                    )
-                                })
-                            }
-                            <motion.div
-                                className={style.images__more}
-                                onClick={() => setMoreVisibility(!moreVisibility)}
-                                whileHover={{ rotate: 10 }}>
-                                +{remainingSneakersData.length}
-                            </motion.div>
-                            <AnimatePresence>
-                                {
-                                    moreVisibility && (
-                                        <motion.div className={style.imagesAbs}
-                                            exit={{ x: 2, opacity: 0 }}
-                                            transition={{ type: 'spring' }}>
-                                            {
-                                                remainingSneakersData.map((eachItem, index) => {
-                                                    return (
-                                                        <motion.div className={style.imagesAbs__img}
-                                                            onClick={(e) => {
-                                                                setMoreVisibility(!moreVisibility)
-                                                                changeImg(e)
-                                                            }}
-                                                            id={`${index + visibleSneakersData.length}`}
-                                                            initial={{ y: -10 * index, opacity: 0 }}
-                                                            animate={{ y: 0, opacity: 1 }}
-                                                            whileHover={{ y: -4 }}
-                                                            key={index}>
-                                                            <img src={eachItem.sneakers} alt='Sneakers' />
-                                                        </motion.div>
-                                                    )
-                                                })
-                                            }
-                                        </motion.div>
-                                    )
-                                }
-                            </AnimatePresence>
+                        <div className={style.productDesc__sellerInfo}>
+                            <div className={style.sellerImage}>
+                                <img src={SellerImg} alt='Seller' loading='lazy' />
+                            </div>
+                            <div className={style.sellerName}>
+                                <p>ProdigyCoder</p>
+                                <span>1326 reviews</span>
+                            </div>
                         </div>
                     </div>
                     <motion.div className={style.productImg}
@@ -269,7 +328,7 @@ const Product = (props: Props) => {
                     </motion.div>
                     <div className={style.productDetails}>
                         <div className={style.productDetails__size}>
-                            <span>Size</span>
+                            <span>Available sizes</span>
                             <div className={style.sizes}>
                                 {
                                     shoeSizes.map((eachSize, index) => {
@@ -292,7 +351,7 @@ const Product = (props: Props) => {
                             </div>
                         </div>
                         <div className={style.productDetails__reviews}>
-                            <span>Reviews</span>
+                            <span>Rating</span>
                             <div className={style.rate}>
                                 <Rate tooltips={desc} onChange={setValue} value={value} />
                                 {value ? <span className="ant-rate-text">{desc[value - 1]}</span> : ''}
@@ -316,7 +375,7 @@ const Product = (props: Props) => {
                             </div>
                         </div> */}
                         {/* Make this a component */}
-                        <div className={style.productDetails__cart}>
+                        {/* <div className={style.productDetails__cart}>
                             <div className={style.top}>
                                 <div className={style.header}>
                                     <p className={style.title}>Selected Items</p>
@@ -382,16 +441,90 @@ const Product = (props: Props) => {
                                     </div>
                                 </div>
                             </div>
+                        </div> */}
+                        <div className={style.images}>
+                            {
+                                visibleSneakersData.map((eachItem, index) => {
+                                    return (
+                                        <div className={style.images__img} id={`${index}`} onClick={(e) => changeImg(e)} key={index}>
+                                            <img src={eachItem.sneakers} alt='Sneakers' />
+                                        </div>
+                                    )
+                                })
+                            }
+                            <motion.div
+                                className={style.images__more}
+                                onClick={() => setMoreVisibility(!moreVisibility)}
+                                whileHover={{ rotate: 10 }}>
+                                +{remainingSneakersData.length}
+                            </motion.div>
+                            <AnimatePresence>
+                                {
+                                    moreVisibility && (
+                                        <motion.div className={style.imagesAbs}
+                                            exit={{ x: 2, opacity: 0 }}
+                                            transition={{ type: 'spring' }}>
+                                            {
+                                                remainingSneakersData.map((eachItem, index) => {
+                                                    return (
+                                                        <motion.div className={style.imagesAbs__img}
+                                                            onClick={(e) => {
+                                                                setMoreVisibility(!moreVisibility)
+                                                                changeImg(e)
+                                                            }}
+                                                            id={`${index + visibleSneakersData.length}`}
+                                                            initial={{ y: -10 * index, opacity: 0 }}
+                                                            animate={{ y: 0, opacity: 1 }}
+                                                            whileHover={{ y: -4 }}
+                                                            key={index}>
+                                                            <img src={eachItem.sneakers} alt='Sneakers' />
+                                                        </motion.div>
+                                                    )
+                                                })
+                                            }
+                                        </motion.div>
+                                    )
+                                }
+                            </AnimatePresence>
                         </div>
+                        {/* <div className={style.actionBtn}>
+                            {cart &&
+                                (
+                                    <motion.p
+                                        initial={{ x: 100, opacity: 0 }}
+                                        animate={{ x: 0, opacity: 1 }}
+                                        transition={{ type: 'spring', stiffness: 150 }}
+                                        className={style.added}>Added to cart!</motion.p>
+                                )
+                            }
+                            <div className={style.addItemBtn} onClick={() => setCart(true)}>
+                                Add to cart
+                            </div>
+                        </div> */}
                     </div>
                 </div>
                 <motion.div className={style.bottom} initial={{ opacity: 1, bottom: '-128px' }} animate={{ opacity: 1, bottom: '-48px' }}>
                     <div className={style.bottom__selected}>
-                        1 item selected
+                        <div className={style.icon}>
+                            <IoMdCart />
+                        </div>
+                        6 items in cart
                     </div>
                     <div className={style.bottom__navigate}>
-                        <div className={style.leftNavigate}><BsChevronLeft /></div>
-                        <div className={style.rightNavigate}><BsChevronRight /></div>
+                        {/* Show navigations only when similar products are visible */}
+                        {
+                            similarProductsVisibility &&
+                            <div className={style.leftNavigate}><BsChevronLeft /></div>
+                        }
+                        <span onClick={toggleSimilarProducts}>
+                            {
+                                similarProductsVisibility ? 'Close' : 'View similar products'
+                            }
+                        </span>
+                        {
+                            similarProductsVisibility &&
+                            <div className={style.rightNavigate}><BsChevronRight /></div>
+                        }
                     </div>
                     <div className={style.bottom__actionBtn}>
                         {cart &&
@@ -424,6 +557,13 @@ const Product = (props: Props) => {
                         </div>
                     </div>
                 </motion.div>
+
+                {/* Similar Products */}
+                <SimilarProducts
+                    containerRef={containerRef}
+                    similarProductsVisibility={similarProductsVisibility}
+                    setSimilarProductsVisibility={setSimilarProductsVisibility}
+                    productDummyData={productDummyData} />
             </motion.div>
         </Suspense>
     )
